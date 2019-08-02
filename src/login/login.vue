@@ -11,7 +11,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" size="large">登录</el-button>
-          <el-button type="primary" size="large">注册</el-button>
+          <el-button type="primary" size="large" @click="goRegister">注册</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -19,7 +19,16 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {}
+  },
+  methods: {
+    goRegister () {
+      this.$router.push('/register')
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
