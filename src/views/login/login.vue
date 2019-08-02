@@ -17,6 +17,7 @@
             v-model="loginForm.code"
             style="width:220px;margin-right:15px"
             placeholder="请输入验证码"
+            @keyup.enter="login"
           ></el-input>
           <el-button type="primary">发送验证码</el-button>
         </el-form-item>
