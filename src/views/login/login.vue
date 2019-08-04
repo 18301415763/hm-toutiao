@@ -17,7 +17,6 @@
             v-model="loginForm.code"
             style="width:220px;margin-right:15px"
             placeholder="请输入验证码"
-            @keyup.enter="login"
           ></el-input>
           <el-button type="primary">发送验证码</el-button>
         </el-form-item>
@@ -33,6 +32,7 @@
 </template>
 
 <script>
+import store from '../../store/store'
 export default {
   data () {
     // 自定义手机号校验规则
@@ -51,8 +51,8 @@ export default {
     }
     return {
       loginForm: {
-        mobile: '',
-        code: ''
+        mobile: '18734168411',
+        code: '246810'
       },
       // 单个校验
       loginRules: {
@@ -79,12 +79,11 @@ export default {
         if (valid) {
           console.log('整体校验成功')
           this.$http
-            .post(
-              'http://ttapi.research.itcast.cn/mp/v1_0/authorizations',
-              this.loginForm
-            )
+            .post('authorizations', this.loginForm)
             .then(({ data }) => {
               // console.log(data)
+              // 跳转之前保存用户信息
+              store.setUser(data.data)
               // 成功后跳转到首页
               this.$router.push('/index')
             })
