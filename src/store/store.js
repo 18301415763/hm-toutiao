@@ -8,5 +8,8 @@ export default {
   },
   getUser () {
     return JSON.parse(window.sessionStorage.getItem('hm-toutiao') || '{}')
+  },
+  clearUser () {
+    window.sessionStorage.removeItem('hm-toutiao')
   }
 }

@@ -11,6 +11,11 @@ import router from '@/router'
 import '@/styles/index.css'
 // 导入axios
 import axios from './api/axios'
+
+// 导入自己封装的Vue插件
+import myPlugin from './components/index'
+Vue.use(myPlugin)
+
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false

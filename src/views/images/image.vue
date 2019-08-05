@@ -1,11 +1,17 @@
 <template>
   <div class="app">
-      素材管理
+    <el-card>
+      <div slot="header" class="clearfix">
+        <my-bread>素材管理</my-bread>
+      </div>
+    </el-card>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: ''
+}
 </script>
 <style lang="less" scoped>
 </style>

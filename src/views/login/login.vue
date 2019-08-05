@@ -75,21 +75,31 @@ export default {
   methods: {
     login () {
       // 整体校验
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
           console.log('整体校验成功')
-          this.$http
-            .post('authorizations', this.loginForm)
-            .then(({ data }) => {
-              // console.log(data)
-              // 跳转之前保存用户信息
-              store.setUser(data.data)
-              // 成功后跳转到首页
-              this.$router.push('/index')
-            })
-            .catch(() => {
-              this.$message.error('手机号或者验证码不正确')
-            })
+          // this.$http
+          //   .post('authorizations', this.loginForm)
+          //   .then(({ data }) => {
+          //     // console.log(data)
+          //     // 跳转之前保存用户信息
+          //     store.setUser(data.data)
+          //     // 成功后跳转到首页
+          //     this.$router.push('/index')
+          //   })
+          //   .catch(() => {
+          //     this.$message.error('手机号或者验证码不正确')
+          //   })
+          try {
+            const result = await this.$http.post(
+              '/authorizations',
+              this.loginForm
+            )
+            store.setUser(result.data.data)
+            this.$router.push('/index')
+          } catch (error) {
+            this.$message.error('手机号或者验证码不正确')
+          }
         }
       })
     }

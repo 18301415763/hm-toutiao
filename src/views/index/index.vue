@@ -53,15 +53,17 @@
           <!-- toggle:控制侧边栏的收 放 -->
           <span class="el-icon-s-fold" @click="toggleMenu()"></span>
           <span class="text">江苏传智播客科技教育有限公司</span>
-          <el-dropdown>
+          <!-- 绑定组件提供的command -->
+          <el-dropdown @command="clickMenu">
             <span class="el-dropdown-link">
-              <img src="../../assets/images/avatar.jpg" alt />
-              下拉菜单
+              <img :src="photo" alt />
+              {{name}}
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-              <el-dropdown-item icon="el-icon-unlock">退登录</el-dropdown-item>
+              <!-- 使用command绑定方法 -->
+              <el-dropdown-item icon="el-icon-setting" command="setting">个人设置</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-unlock" command="logOut">退登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-header>
@@ -75,15 +77,33 @@
 </template>
 
 <script>
+import Store from '../../store/store'
 export default {
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      name: '',
+      photo: ''
     }
+  },
+  created () {
+    this.name = Store.getUser().name
+    this.photo = Store.getUser().photo
   },
   methods: {
     toggleMenu () {
       this.isCollapse = !this.isCollapse
+    },
+    setting () {
+      this.$router.push('/setting')
+    },
+    logOut () {
+      Store.clearUser()
+      this.$router.push({ name: 'login' })
+    },
+    // 组件提供的事件 command
+    clickMenu (menuType) {
+      this[menuType]()
     }
   }
 }
