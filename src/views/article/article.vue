@@ -41,32 +41,26 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <!-- <my-test> -->
-    <!-- slot属性的值就是 插槽的名字，以此来指定插槽,并显示内容 -->
-    <!-- <div slot="content"></div> -->
-
-    <!-- 2.6.0 的新写法 v-slot -->
-    <!-- <template v-slot:content="scope">content：{{scope.msg1}}</template> -->
-    <!-- slot-scope="msg" 指定 插槽 获取传递过来的'所有自定义属性和值'的集合数据--对象 {msg:'值'}-->
-    <!-- <div slot="footer" slot-scope="scope">footer 获取组件内部的数据：{{scope.a}}</div> -->
-    <!-- </my-test> -->
+    <!-- 结果区域 -->
     <el-card>
       <div slot="header">根据筛选条件共查询到 0 条结果：</div>
       <!-- 表格组件 -->
-      <!-- :data="tableData" 绑定的表格数据 -->
+      <!-- :data="articles" 绑定的表格数据 -->
       <el-table :data="articles" style="width: 100%">
         <!-- prop="date" 指定字段 -->
-        <el-table-column prop="id" label="编号" width="180"></el-table-column>
-        <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-        <el-table-column prop="address" label="地址"></el-table-column>
+        <el-table-column prop="id" label="封面" width="236"></el-table-column>
+        <el-table-column prop="name" label="标题" width="236"></el-table-column>
+        <el-table-column prop="address" label="状态" width="236"></el-table-column>
+        <el-table-column prop="name" label="发布时间" width="236"></el-table-column>
+        <el-table-column prop="address" label="操作" width></el-table-column>
       </el-table>
+
       <!-- 分页组件 -->
       <!-- prev:左箭头 page:页码 next:右箭头 total:总条数 -->
       <div style="text-align:center;margin-top:30px;">
         <el-pagination background layout="prev, pager, next, total" :total="1000"></el-pagination>
       </div>
     </el-card>
-    <!-- 结果区域 -->
   </div>
 </template>
 

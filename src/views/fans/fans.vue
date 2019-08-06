@@ -1,5 +1,11 @@
 <template>
-  <div>粉丝管理</div>
+  <div>
+    <el-card>
+      <div slot="header" class="clearfix">
+        <my-bread>粉丝管理</my-bread>
+      </div>
+    </el-card>
+  </div>
 </template>
 
 <script>

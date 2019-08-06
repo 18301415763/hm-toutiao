@@ -1,5 +1,11 @@
 <template>
-  <div>个人设置</div>
+  <div>
+    <el-card>
+      <div slot="header" class="clearfix">
+        <my-bread>个人设置</my-bread>
+      </div>
+    </el-card>
+  </div>
 </template>
 
 <script>
