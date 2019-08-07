@@ -83,7 +83,9 @@ export default {
       // 日期数据
       dateArr: [],
       // 内容管理数据
-      articles: []
+      articles: [
+        {}
+      ]
     }
   }
 }
