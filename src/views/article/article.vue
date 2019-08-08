@@ -196,10 +196,12 @@ export default {
     },
     // 跳转编辑页
     edit (id) {
+      // 使用param传参，会产生动态路由 因为 /publish 和 /publish/10 是2个不同的路由
+      // 使用query传参,不会产生这种问题 /publish 和 /publish?id=10 是同一个地址
       this.$router.push('/publish?' + id)
     }
   },
-  // 使用watch监听数据的变化
+  // 使用watch监听下拉框数据的变化
   watch: {
     'reqParams.channel_id': function (newVal, oldVal) {
       // console.log(oldVal, newVal)

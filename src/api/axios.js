@@ -54,7 +54,7 @@ axios.interceptors.response.use(function (response) {
 })
 
 // axios默认的JSON.parse不能转换数字最大安全值,需要使用第三方包 JOSN-Bigint
-// 在响应给浏览器前把数据转换成JSON对象
+// 在响应给then或catch前把数据转换成JSON对象
 axios.defaults.transformResponse = [(data) => {
   try {
     return JSONBIG.parse(data)
