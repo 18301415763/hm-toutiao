@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '../store/store'
+import JSONBIG from 'json-bigint'
 // 配置默认项
 // 路径
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0'
@@ -20,9 +21,9 @@ axios.interceptors.request.use(function (config) {
 */
 axios.interceptors.request.use(function (config) {
   // 在请求之前把token信息给了请求头,所以需要修改 config
-  console.log(config)
+  // console.log(config)
   config.headers.Authorization = 'Bearer ' + store.getUser().token
-  console.log(store.getUser())
+  // console.log(store.getUser())
   return config
 }, function (error) {
   return Promise.reject(error)
@@ -40,16 +41,26 @@ axios.interceptors.response.use(function (response) {
   });
 */
 axios.interceptors.response.use(function (response) {
-  console.log(response)
+  // console.log(response)
 
   return response
 }, function (error) {
   // 由于后台保存token不是永久的,所以当token失效时,监听所由接口的响应状态是不是401,如果是就重新登录
-  console.log(error.response)
+  // console.log(error.response)
   if (error.response.status === '401') {
     location.hash = '#/login'
   }
   return Promise.reject(error)
 })
+
+// axios默认的JSON.parse不能转换数字最大安全值,需要使用第三方包 JOSN-Bigint
+// 在响应给浏览器前把数据转换成JSON对象
+axios.defaults.transformResponse = [(data) => {
+  try {
+    return JSONBIG.parse(data)
+  } catch (error) {
+    return data
+  }
+}]
 
 export default axios
