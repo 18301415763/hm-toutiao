@@ -19,14 +19,8 @@
         </el-form-item>
         <el-form-item label="频道：">
           <!-- clearable 清空选项 -->
-          <el-select v-model="reqParams.channel_id" clearable placeholder="请选择">
-            <el-option
-              v-for="item in channel_options"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            ></el-option>
-          </el-select>
+          <!-- 封装的my-channel组件 -->
+          <my-channel v-model="reqParams.channel_id"></my-channel>
         </el-form-item>
         <el-form-item label="日期：">
           <el-date-picker
@@ -113,7 +107,7 @@ export default {
       // 请求参数(传给后台的数据)
       reqParams: {
         status: null,
-        channel_id: null,
+        channel_id: 2,
         begin_pubdate: null,
         end_pubdate: null,
         // 当前页
@@ -121,8 +115,7 @@ export default {
         // 每页显示条数
         per_page: 10
       },
-      // 下拉框数据
-      channel_options: [],
+
       // 日期数据
       dateArr: [],
       // 内容管理数据
@@ -132,19 +125,11 @@ export default {
     }
   },
   created () {
-    this.getChannelOptions()
+    // this.getChannelOptions()
     this.getArticles()
   },
   // 方法
   methods: {
-    // 获取下拉框数据
-    async getChannelOptions () {
-      const {
-        data: { data }
-      } = await this.$http.get('/channels')
-      // console.log(data.channels)
-      this.channel_options = data.channels
-    },
     // 获取内容管理数据
     async getArticles () {
       const {
@@ -199,15 +184,6 @@ export default {
       // 使用param传参，会产生动态路由 因为 /publish 和 /publish/10 是2个不同的路由
       // 使用query传参,不会产生这种问题 /publish 和 /publish?id=10 是同一个地址
       this.$router.push('/publish?' + id)
-    }
-  },
-  // 使用watch监听下拉框数据的变化
-  watch: {
-    'reqParams.channel_id': function (newVal, oldVal) {
-      // console.log(oldVal, newVal)
-      if (newVal === '') {
-        this.reqParams.channel_id = null
-      }
     }
   }
 }
