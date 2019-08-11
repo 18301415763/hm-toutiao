@@ -78,6 +78,8 @@
 
 <script>
 import Store from '../../store/store'
+import eventBus from '../../components/eventBus'
+
 export default {
   data () {
     return {
@@ -87,6 +89,14 @@ export default {
     }
   },
   created () {
+    // 用户名的更新
+    eventBus.$on('updateUser', data => {
+      this.name = data
+    })
+    // 用户头像的更新
+    eventBus.$on('updatePhoto', data => {
+      this.photo = data
+    })
     this.name = Store.getUser().name
     this.photo = Store.getUser().photo
   },

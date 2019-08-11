@@ -107,7 +107,7 @@ export default {
       // 请求参数(传给后台的数据)
       reqParams: {
         status: null,
-        channel_id: 2,
+        channel_id: null,
         begin_pubdate: null,
         end_pubdate: null,
         // 当前页
@@ -183,7 +183,7 @@ export default {
     edit (id) {
       // 使用param传参，会产生动态路由 因为 /publish 和 /publish/10 是2个不同的路由
       // 使用query传参,不会产生这种问题 /publish 和 /publish?id=10 是同一个地址
-      this.$router.push('/publish?' + id)
+      this.$router.push('/publish?id=' + id)
     }
   }
 }
